@@ -15,7 +15,7 @@ const mainButton = document.getElementById("load-main");
 const secondaryButton = document.getElementById("load-secondary");
 
 // seleziono i placeholders
-const placeholders = document.getElementsByClassName("bd-placeholder-img");
+const placeholders = document.querySelectorAll("svg.bd-placeholder-img");
 const cards = document.getElementsByClassName("card");
 
 // creo array vuoto dove salvo le immagini ottenute come risposta dal server
@@ -25,8 +25,14 @@ const getPictures = async () => {
   try {
     const response = await fetch(API_URL + `search?query=[${query}]`, options);
     const data = await response.json();
-    console.log(data);
-    pictures = data.photos;
+
+    // clono l'array di foto fornito da pexels
+    pictures = [...data.photos];
+
+    //prendo solo le prime 9 immagini
+    pictures = pictures.slice(0, 9);
+
+    //eseguo la funzione per inserire le immagini nelle card
     setPictures();
   } catch (error) {
     console.log(error);
@@ -34,12 +40,15 @@ const getPictures = async () => {
 };
 
 const setPictures = () => {
+  for (el of placeholders) {
+    el.remove();
+  }
   pictures.forEach((element, i) => {
-    console.log(i);
-    // placeholders[i].innerHTML = "";
-    placeholders[i].outerHTML = `<img src="${pictures[i].src.large}" alt="picture of ${query}">`;
-    // let image = document.createElement("img");
-    // cards[i].appendChild(image);
+    placeholders[i].remove();
+    let image = document.createElement("img");
+    image.src = `${pictures[i].src.large}`;
+    image.alt = `picture of ${query}`;
+    cards[i].prepend(image);
   });
 };
 
