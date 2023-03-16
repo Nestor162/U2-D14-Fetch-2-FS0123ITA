@@ -68,6 +68,9 @@ const setPictures = query => {
 
     // sostituisco pulsante edit
     buttonsEdit[i].textContent = "Hide";
+
+    // aggiungo il eventlistener alla card
+    addCardListener();
   });
 };
 
@@ -85,3 +88,13 @@ buttonsEdit.forEach((el, i) => {
     cards[i].classList.add("d-none");
   });
 });
+
+const addCardListener = () => {
+  for (card of cards) {
+    card.addEventListener("click", () => {
+      console.log("questo e una card");
+    });
+  }
+};
+
+const URLParams = new URLSearchParams(window.location.search);
