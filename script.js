@@ -14,7 +14,7 @@ const mainButton = document.getElementById("load-main");
 const secondaryButton = document.getElementById("load-secondary");
 
 // seleziono il secondo bottone ('Edit') da sostituire con 'Hide'
-const buttonEdit = document.querySelectorAll(".btn-group button:nth-of-type(2)");
+const buttonsEdit = document.querySelectorAll(".btn-group button:nth-of-type(2)");
 
 // seleziono i placeholders
 const placeholders = document.querySelectorAll("svg.bd-placeholder-img");
@@ -67,7 +67,7 @@ const setPictures = query => {
     textId[i].textContent = `id: ${pictures[i].id}`;
 
     // sostituisco pulsante edit
-    buttonEdit[i].textContent = "Hide";
+    buttonsEdit[i].textContent = "Hide";
   });
 };
 
@@ -78,4 +78,10 @@ mainButton.addEventListener("click", () => {
 
 secondaryButton.addEventListener("click", () => {
   getPictures("patagonia");
+});
+
+buttonsEdit.forEach((el, i) => {
+  el.addEventListener("click", () => {
+    cards[i].classList.add("d-none");
+  });
 });
