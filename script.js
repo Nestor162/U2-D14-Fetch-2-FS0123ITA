@@ -39,6 +39,13 @@ const getPictures = async query => {
 };
 
 const setPictures = query => {
+  // se gia esiste un immagine nella card, vengono eliminate prima di inserire nuove
+  if (document.querySelector(".custom-image")) {
+    const prevPics = document.querySelectorAll(".custom-image");
+    prevPics.forEach((element, i) => {
+      element.remove();
+    });
+  }
   pictures.forEach((element, i) => {
     // elimino il placeholder
     placeholders[i].remove();
@@ -47,7 +54,7 @@ const setPictures = query => {
     let image = document.createElement("img");
     image.src = `${pictures[i].src.large}`;
     image.alt = `picture of ${query}`;
-    image.classList.add("card-img-top");
+    image.classList.add("card-img-top", "custom-image");
     cards[i].prepend(image);
   });
 };
