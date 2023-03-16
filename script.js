@@ -1,7 +1,6 @@
 // parametri per utilizzare l'API
 const API_URL = "https://api.pexels.com/v1/";
 const API_KEY = "6XSqTDMTVgXKYcmjdc4RMZ9WJi2mjYY8QBzqWx95ywqGr1zsxAnvRxZd";
-let query = "japan";
 
 const options = {
   method: "GET",
@@ -21,7 +20,7 @@ const cards = document.getElementsByClassName("card");
 // creo array vuoto dove salvo le immagini ottenute come risposta dal server
 let pictures = [];
 
-const getPictures = async () => {
+const getPictures = async query => {
   try {
     const response = await fetch(API_URL + `search?query=[${query}]`, options);
     const data = await response.json();
@@ -33,13 +32,13 @@ const getPictures = async () => {
     pictures = pictures.slice(0, 9);
 
     //eseguo la funzione per inserire le immagini nelle card
-    setPictures();
+    setPictures(query);
   } catch (error) {
     console.log(error);
   }
 };
 
-const setPictures = () => {
+const setPictures = query => {
   for (el of placeholders) {
     el.remove();
   }
@@ -52,6 +51,11 @@ const setPictures = () => {
   });
 };
 
+// ogni bottone al click passa un parametro differente
 mainButton.addEventListener("click", () => {
-  getPictures();
+  getPictures("japan");
+});
+
+secondaryButton.addEventListener("click", () => {
+  getPictures("patagonia");
 });
