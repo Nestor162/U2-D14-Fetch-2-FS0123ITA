@@ -17,6 +17,9 @@ const secondaryButton = document.getElementById("load-secondary");
 const placeholders = document.querySelectorAll("svg.bd-placeholder-img");
 const cards = document.getElementsByClassName("card");
 
+// seleziono il testo '9 mins' da sostituire con id
+const textId = document.getElementsByTagName("small");
+
 // creo array vuoto dove salvo le immagini ottenute come risposta dal server
 let pictures = [];
 
@@ -56,6 +59,9 @@ const setPictures = query => {
     image.alt = `picture of ${query}`;
     image.classList.add("card-img-top", "custom-image");
     cards[i].prepend(image);
+
+    // modifico il testo '9 mins'
+    textId[i].textContent = `id: ${pictures[i].id}`;
   });
 };
 
