@@ -39,9 +39,6 @@ const getPictures = async query => {
 };
 
 const setPictures = query => {
-  for (el of placeholders) {
-    el.remove();
-  }
   pictures.forEach((element, i) => {
     placeholders[i].remove();
     let image = document.createElement("img");
