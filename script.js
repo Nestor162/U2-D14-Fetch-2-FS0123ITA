@@ -40,10 +40,14 @@ const getPictures = async query => {
 
 const setPictures = query => {
   pictures.forEach((element, i) => {
+    // elimino il placeholder
     placeholders[i].remove();
+
+    // creo l'immagine con i suoi attributi
     let image = document.createElement("img");
     image.src = `${pictures[i].src.large}`;
     image.alt = `picture of ${query}`;
+    image.classList.add("card-img-top");
     cards[i].prepend(image);
   });
 };
