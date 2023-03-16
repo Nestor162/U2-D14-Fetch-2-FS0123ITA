@@ -13,6 +13,9 @@ const options = {
 const mainButton = document.getElementById("load-main");
 const secondaryButton = document.getElementById("load-secondary");
 
+// seleziono il secondo bottone ('Edit') da sostituire con 'Hide'
+const buttonEdit = document.querySelectorAll(".btn-group button:nth-of-type(2)");
+
 // seleziono i placeholders
 const placeholders = document.querySelectorAll("svg.bd-placeholder-img");
 const cards = document.getElementsByClassName("card");
@@ -62,6 +65,9 @@ const setPictures = query => {
 
     // modifico il testo '9 mins'
     textId[i].textContent = `id: ${pictures[i].id}`;
+
+    // sostituisco pulsante edit
+    buttonEdit[i].textContent = "Hide";
   });
 };
 
